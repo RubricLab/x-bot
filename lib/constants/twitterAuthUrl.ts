@@ -1,8 +1,8 @@
-import {env} from '~/env.mjs'
+import env from '~/env.mjs'
 
 const rootUrl = 'https://twitter.com/i/oauth2/authorize'
 const options = {
-	redirect_uri: env.TWITTER_REDIRECT_URI,
+	redirect_uri: `${env.NEXTAUTH_URL}/api/twitter/auth`,
 	client_id: env.TWITTER_CLIENT_ID,
 	state: 'state',
 	response_type: 'code',
