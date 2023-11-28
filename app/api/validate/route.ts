@@ -38,8 +38,6 @@ export async function GET() {
 
 	const user = (await userData.json()).data
 
-	console.log(user)
-
 	async function validate() {
 		if (user.public_metrics.followers_count < minFollowers)
 			return RejectReason.MIN_FOLLOWERS
@@ -107,6 +105,8 @@ export async function GET() {
 				validated: true
 			}
 		})
+
+	console.log(`VALIDATE: ${user.name} ${rejectReason ? 'REJECTED' : 'VALID'}`)
 
 	return Response.json({validated: !rejectReason, rejectReason})
 }

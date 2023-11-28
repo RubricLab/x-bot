@@ -19,8 +19,6 @@ export default async function scrape(formData: FormData) {
 
 	const tweet = await tweetData.json()
 
-	console.log('tweet', tweet)
-
 	await db.post.create({
 		data: {
 			id,
@@ -28,5 +26,6 @@ export default async function scrape(formData: FormData) {
 			likes: tweet.data.public_metrics.like_count
 		}
 	})
+
 	redirect('/posts')
 }

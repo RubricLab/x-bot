@@ -18,7 +18,6 @@ export default async function refreshAuthToken({
 	)
 
 	if (expires_at < new Date().getTime() / 1000) {
-		console.log('REFRESHING TOKEN')
 		const refreshedData = await fetch('https://api.twitter.com/2/oauth2/token', {
 			method: 'POST',
 			headers: {

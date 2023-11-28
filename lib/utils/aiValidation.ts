@@ -15,7 +15,6 @@ export default async function aiValidation({
 	url: string
 	validator: string
 }) {
-	console.log(tweets, description, url, validator)
 	const validatedData = await openai.chat.completions.create({
 		messages: [
 			{

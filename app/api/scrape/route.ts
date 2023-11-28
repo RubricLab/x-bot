@@ -84,5 +84,9 @@ export async function GET() {
 			}
 		})
 
+	console.log(
+		`SCRAPE: ${likers.meta.result_count} likers scraped from ${post.id}`
+	)
+
 	return Response.json(likers)
 }

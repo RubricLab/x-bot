@@ -84,5 +84,7 @@ export async function GET() {
 		}
 	})
 
+	console.log(`FOLLOW: ${user.name} followed ${builder.username}`)
+
 	return Response.json({username: builder.username, ...follow})
 }
