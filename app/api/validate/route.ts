@@ -14,7 +14,7 @@ import {
 } from '~/constants/validation'
 import aiValidation from '~/utils/aiValidation'
 
-export const dynamic = 'force-dynamic'
+export const maxDuration = 60
 
 export async function GET() {
 	const builder = await db.builder.findFirst({

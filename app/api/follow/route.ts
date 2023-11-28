@@ -5,7 +5,7 @@ import drinkBeer from '~/utils/drinkBeer'
 import randomNumber from '~/utils/randomNumber'
 import refreshAuthToken from '~/utils/refreshAuthToken'
 
-export const maxDuration = 600
+export const maxDuration = 300
 
 export async function GET() {
 	const users = await db.user.findMany({

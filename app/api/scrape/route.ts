@@ -2,7 +2,7 @@ import {Status} from '@prisma/client'
 import db from '~/db'
 import env from '~/env.mjs'
 
-export const maxDuration = 600
+export const maxDuration = 60
 
 export async function GET() {
 	const post = await db.post.findFirst({
