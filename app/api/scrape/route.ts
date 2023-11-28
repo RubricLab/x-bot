@@ -2,6 +2,8 @@ import {Status} from '@prisma/client'
 import db from '~/db'
 import env from '~/env.mjs'
 
+export const dynamic = 'force-dynamic'
+
 export const maxDuration = 60
 
 export async function GET() {

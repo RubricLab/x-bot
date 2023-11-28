@@ -5,6 +5,8 @@ import drinkBeer from '~/utils/drinkBeer'
 import randomNumber from '~/utils/randomNumber'
 import refreshAuthToken from '~/utils/refreshAuthToken'
 
+export const dynamic = 'force-dynamic'
+
 export const maxDuration = 300
 
 export async function GET() {
