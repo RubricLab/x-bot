@@ -1,4 +1,5 @@
 import db from '~/db'
+import env from '~/env.mjs'
 import renderValid from '~/utils/renderValid'
 
 export default async function Page() {
@@ -15,6 +16,14 @@ export default async function Page() {
 				}
 			}
 		},
+		where:
+			env.NODE_ENV === 'development'
+				? {
+						OR: [{validated: true}, {validated: null}, {validated: false}]
+				  }
+				: {
+						OR: [{validated: true}, {validated: null}]
+				  },
 		orderBy: [{validated: 'asc'}, {createdAt: 'asc'}, {name: 'asc'}]
 	})
 

@@ -5,6 +5,7 @@ import {RejectReason} from '@prisma/client'
 import {
 	aiValidator,
 	enforceVerification,
+	followMoreThanFollowers,
 	maxDaysSinceLastPost,
 	maxFollowers,
 	minFollowers,
@@ -53,6 +54,11 @@ export async function GET() {
 			return RejectReason.MIN_LIKES
 		else if (enforceVerification && !user.verified)
 			return RejectReason.NOT_VERIFIED
+		else if (
+			followMoreThanFollowers &&
+			user.public_metrics.following_count < user.public_metrics.followers_count
+		)
+			return RejectReason.NOT_FOLLOW_MORE_THAN_FOLLOWERS
 		else {
 			const mostRecentTweetsData = await fetch(
 				`https://api.twitter.com/2/users/${user.id}/tweets?max_results=5&exclude=retweets,replies&tweet.fields=created_at`,
