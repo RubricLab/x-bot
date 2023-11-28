@@ -47,6 +47,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   enabled       Boolean   @default(false)
+  following     Builder[]
 }
 
 model VerificationToken {
@@ -64,6 +65,17 @@ enum Status {
   ERROR
 }
 
+enum RejectReason {
+  MIN_FOLLOWERS
+  MAX_FOLLOWERS
+  MIN_FOLLOWING
+  MIN_POSTS
+  MIN_LIKES
+  MAX_DAYS_SINCE_LAST_POST
+  NOT_VERIFIED
+  AI_DISCRETIONARY
+}
+
 model Post {
   id           String   @id
   url          String
@@ -71,13 +83,21 @@ model Post {
   likes        Int
   status       Status   @default(QUEUED)
   pageToken    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model Builder {
-  id           String   @id
-  name         String
-  username     String
-  validated    Boolean?
-  validatedAt  DateTime?
-  likes        Post[]
+  id                String   @id
+  name              String
+  username          String
+  validated         Boolean?
+  validatedAt       DateTime?
+  rejectReason      RejectReason?
+  summary           String?
+  likes             Post[]
+  followed          Boolean
+  followedBy        User[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }

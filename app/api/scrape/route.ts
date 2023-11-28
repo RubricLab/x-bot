@@ -1,9 +1,6 @@
-// tick every minute
-
 import {Status} from '@prisma/client'
 import db from '~/db'
 import env from '~/env.mjs'
-import drinkBeer from '~/utils/drinkBeer'
 
 export const maxDuration = 600
 
@@ -17,12 +14,13 @@ export async function GET() {
 		select: {
 			id: true,
 			pageToken: true
+		},
+		orderBy: {
+			createdAt: 'asc'
 		}
 	})
 
 	if (!post) return Response.json({})
-
-	await drinkBeer(2)
 
 	const likersData = await fetch(
 		`https://api.twitter.com/2/tweets/${post.id}/liking_users${
@@ -51,6 +49,7 @@ export async function GET() {
 								id: post.id
 							}
 						},
+						followed: false,
 						name: liker.name,
 						username: liker.username
 					},

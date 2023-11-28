@@ -3,6 +3,14 @@
 		{
 			"path": "/api/scrape",
 			"schedule": "*/10 * * * *"
+		},
+		{
+			"path": "/api/validate",
+			"schedule": "*/5 * * * *"
+		},
+		{
+			"path": "/api/follow",
+			"schedule": "*/15 17-22 * * *"
 		}
 	]
 }

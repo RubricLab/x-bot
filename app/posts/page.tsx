@@ -14,6 +14,9 @@ export default async function Page() {
 					likers: true
 				}
 			}
+		},
+		orderBy: {
+			createdAt: 'asc'
 		}
 	})
 

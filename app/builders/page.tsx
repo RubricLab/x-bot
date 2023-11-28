@@ -7,24 +7,38 @@ export default async function Page() {
 			id: true,
 			name: true,
 			username: true,
-			validated: true
-		}
+			validated: true,
+			rejectReason: true,
+			followedBy: {
+				select: {
+					name: true
+				}
+			}
+		},
+		orderBy: [{validated: 'asc'}, {createdAt: 'asc'}, {name: 'asc'}]
 	})
 
 	return (
 		<div className='flex h-screen w-full flex-col items-center justify-center gap-10 p-5 sm:p-20'>
-			<div className='flex flex-col items-start gap-4'>
+			<div className='h flex max-h-screen w-full flex-col items-start gap-4 overflow-scroll'>
 				{builders.map(builder => (
 					<div
 						key={builder.id}
-						className='flex w-full items-center gap-4'>
-						<div className='text-xs'>{renderValid(builder.validated)}</div>
-						<div>
-							<a
-								href={`https://twitter.com/${builder.username}`}
-								target='_blank'>
-								{builder.name}
-							</a>
+						className='flex w-full justify-between gap-4'>
+						<div className='flex items-center gap-4'>
+							<div className='text-xs'>{renderValid(builder.validated)}</div>
+							<div>
+								<a
+									href={`https://twitter.com/${builder.username}`}
+									target='_blank'>
+									{builder.name}
+								</a>
+							</div>
+						</div>
+						<div className='flex items-center gap-4'>
+							<p>
+								{builder.rejectReason || builder.followedBy.map(f => f.name).join(', ')}
+							</p>
 						</div>
 					</div>
 				))}
