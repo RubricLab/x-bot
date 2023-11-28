@@ -1,8 +1,8 @@
-export const minFollowers = 100
+export const minFollowers = 50
 export const maxFollowers = 1000
-export const minFollowing = 100
+export const minFollowing = 200
 export const minPosts = 100
-export const minLikes = 100
+export const minLikes = 200
 export const maxDaysSinceLastPost = 20
 export const enforceVerification = false
 export const aiValidator =
