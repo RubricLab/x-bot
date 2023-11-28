@@ -10,7 +10,7 @@
 		},
 		{
 			"path": "/api/follow",
-			"schedule": "*/15 17-22 * * *"
+			"schedule": "*/15 * * * *"
 		}
 	]
 }
