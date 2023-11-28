@@ -60,22 +60,8 @@ export const authOptions: NextAuthOptions = {
 					scope: [
 						'users.read',
 						'tweet.read',
-						'tweet.write',
-						'bookmark.read',
-						'bookmark.write',
-						'like.read',
-						'like.write',
 						'follows.write',
-						'follows.read',
-						'offline.access',
-						'tweet.moderate.write',
-						'block.write',
-						'block.read',
-						'mute.write',
-						'mute.read',
-						'space.read',
-						'list.read',
-						'list.write'
+						'offline.access'
 					].join(' ')
 				}
 			}
