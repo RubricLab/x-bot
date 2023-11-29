@@ -47,7 +47,7 @@ export async function GET() {
 
 	if (!builder) return Response.json({})
 
-	await drinkBeer(4)
+	await drinkBeer(5)
 
 	const accessToken = await refreshAuthToken({
 		access_token: account.access_token,
@@ -72,21 +72,22 @@ export async function GET() {
 
 	const follow = (await followData.json()).data
 
-	await db.builder.update({
-		where: {
-			id: builder.id
-		},
-		data: {
-			followed: true,
-			followedBy: {
-				connect: {
-					id: user.id
+	if (followData.status === 200) {
+		await db.builder.update({
+			where: {
+				id: builder.id
+			},
+			data: {
+				followed: true,
+				followedBy: {
+					connect: {
+						id: user.id
+					}
 				}
 			}
-		}
-	})
-
-	console.log(`FOLLOW: ${user.name} followed ${builder.username}`)
+		})
+		console.log(`FOLLOW: ${user.name} followed ${builder.username}`)
+	} else console.log(`ERROR: ${user.name} failed to follow ${builder.username}`)
 
 	return Response.json({username: builder.username, ...follow})
 }

@@ -46,7 +46,49 @@ export const authOptions: NextAuthOptions = {
 				id: user.id,
 				enabled: user.enabled
 			}
-		})
+		}),
+		signIn: async ({user, account}) => {
+			console.log(user, account)
+			await db.account.upsert({
+				where: {
+					provider_providerAccountId: {
+						provider: account.provider,
+						providerAccountId: account.providerAccountId
+					}
+				},
+				update: {
+					access_token: account.access_token,
+					refresh_token: account.refresh_token,
+					expires_at: account.expires_at,
+					scope: account.scope
+				},
+				create: {
+					type: account.type,
+					access_token: account.access_token,
+					refresh_token: account.refresh_token,
+					expires_at: account.expires_at,
+					provider: account.provider,
+					providerAccountId: account.providerAccountId,
+					token_type: account.token_type,
+					scope: account.scope,
+					user: {
+						connectOrCreate: {
+							where: {
+								id: user.id
+							},
+							create: {
+								name: user.name,
+								email: user.email,
+								image: user.image,
+								enabled: true
+							}
+						}
+					}
+				}
+			})
+
+			return true
+		}
 	},
 	adapter: PrismaAdapter(db),
 	providers: [
