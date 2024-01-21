@@ -2,15 +2,15 @@
 	"crons": [
 		{
 			"path": "/api/scrape",
-			"schedule": "*/10 * * * *"
+			"schedule": "0 0 29 2 1"
 		},
 		{
 			"path": "/api/validate",
-			"schedule": "*/5 * * * *"
+			"schedule": "0 0 29 2 1"
 		},
 		{
 			"path": "/api/follow",
-			"schedule": "*/15 12-22 * * *"
+			"schedule": "0 0 29 2 1"
 		}
 	]
 }
